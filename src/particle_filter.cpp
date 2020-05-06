@@ -95,13 +95,13 @@ void ParticleFilter::prediction(double delta_t, double std_pos[],
   // Apply bicycle model calculation here. 
   for (int i = 0; i < num_particles; ++i) {
 
-    // If Yaw is zero
-    if ( fabs(yaw_rate) <= 0.0001 ) { 
+    // If angle is zero
+    if ( fabs(yaw_rate) == 0.0 ) { 
       particles[i].x += velocity * delta_t * cos( particles[i].theta );
       particles[i].y += velocity * delta_t * sin( particles[i].theta );
       
     } 
-    // If Yaw is available
+    // If angle is available
     else {
       particles[i].x += velocity / yaw_rate * ( sin( particles[i].theta + yaw_rate * delta_t ) - sin( particles[i].theta ) );
       particles[i].y += velocity / yaw_rate * ( cos( particles[i].theta ) - cos( particles[i].theta + yaw_rate * delta_t ) );
